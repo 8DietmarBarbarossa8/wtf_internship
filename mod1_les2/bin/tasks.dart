@@ -3,9 +3,8 @@
 bool checkPalindrome(String? p) => p != null && p.isNotEmpty && _compare(p);
 
 bool _compare(String source) {
-  List<String> elements = source.split('');
-  for (int i = 0; i < elements.length / 2; i++) {
-    if (elements[i] != elements[elements.length - 1 - i]) {
+  for (int i = 0; i < source.length / 2; i++) {
+    if (source[i] != source[source.length - 1 - i]) {
       return false;
     }
   }
@@ -33,34 +32,19 @@ bool _isPrime(int n) {
 
 // 4) Написать рекурсивную функцию, которая возвращает последовательность чисел Фибоначчи до числа N.
 
-List<int> fibonacci(int n) {
-  if (n <= 0) {
-    return [];
-  } else if (n == 1) {
-    return [1, 1];
-  } else {
-    List<int> seq = [];
-    _fillSequence(seq, n, n);
-    return [1, 1, ...seq];
-  }
+List<int> createFibSequence(int n) {
+  if (n < 1) return [];
+  List<int> seq = [1, 1];
+  _fillSequence(n, seq);
+  return seq;
 }
 
-void _fillSequence(List<int> seq, int initN, int n) {
-  if (n < 3) {
-    if (initN == 2) seq.insert(0, initN);
-    if (initN == 3) seq.insert(seq.length, initN);
-    return;
+void _fillSequence(int n, List<int> seq) {
+  int lastElement = seq[seq.length - 1] + seq[seq.length - 2];
+  if (lastElement <= n) {
+    seq.add(lastElement);
+    _fillSequence(n, seq);
   }
-  int result = _fibonacciPosition(n);
-  if (result <= initN) seq.insert(0, result);
-  _fillSequence(seq, initN, n - 1);
-}
-
-int _fibonacciPosition(int n) {
-  if (n == 1 || n == 2) {
-    return 1;
-  }
-  return _fibonacciPosition(n - 1) + _fibonacciPosition(n - 2);
 }
 
 // 5) Написать функцию, которая возвращает первый неповторяющийся символ в строке – если такого нет, то возвращает null.
@@ -211,7 +195,7 @@ bool _isValid(String expression) {
   RegExp regExp = RegExp('[*/+]');
   if (expression.startsWith(regExp)) return false;
 
-  // It has contains only 0-9 and + - * / .
+  // It has contains only 0-9 and + - * /
   regExp = RegExp(r'[0-9*/+-]+$');
   if (!regExp.hasMatch(expression)) return false;
 

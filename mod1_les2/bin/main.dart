@@ -39,18 +39,18 @@ main() {
   });
 
   test("Task 4 - Fibonacci", () {
-    expect(fibonacci(3), equals([1, 1, 2, 3]));
-    expect(fibonacci(4), equals([1, 1, 2, 3]));
-    expect(fibonacci(5), equals([1, 1, 2, 3, 5]));
-    expect(fibonacci(6), equals([1, 1, 2, 3, 5]));
-    expect(fibonacci(7), equals([1, 1, 2, 3, 5]));
-    expect(fibonacci(8), equals([1, 1, 2, 3, 5, 8]));
-    expect(fibonacci(9), equals([1, 1, 2, 3, 5, 8]));
-    expect(fibonacci(2), equals([1, 1, 2]));
-    expect(fibonacci(1), equals([1, 1]));
-    expect(fibonacci(0), equals([]));
-    expect(fibonacci(-1), equals([]));
-    expect(fibonacci(40), equals([1, 1, 2, 3, 5, 8, 13, 21, 34]));
+    expect(createFibSequence(3), equals([1, 1, 2, 3]));
+    expect(createFibSequence(4), equals([1, 1, 2, 3]));
+    expect(createFibSequence(5), equals([1, 1, 2, 3, 5]));
+    expect(createFibSequence(6), equals([1, 1, 2, 3, 5]));
+    expect(createFibSequence(7), equals([1, 1, 2, 3, 5]));
+    expect(createFibSequence(8), equals([1, 1, 2, 3, 5, 8]));
+    expect(createFibSequence(9), equals([1, 1, 2, 3, 5, 8]));
+    expect(createFibSequence(2), equals([1, 1, 2]));
+    expect(createFibSequence(1), equals([1, 1]));
+    expect(createFibSequence(0), equals([]));
+    expect(createFibSequence(-1), equals([]));
+    expect(createFibSequence(40), equals([1, 1, 2, 3, 5, 8, 13, 21, 34]));
   });
 
   test("Task 5 - The first unique symbol", () {
