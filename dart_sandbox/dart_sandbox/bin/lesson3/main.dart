@@ -21,7 +21,7 @@ import 'doubly_linked_list.dart';
 
 main() {
   final DoublyLinkedList dLL = DoublyLinkedList(volume: 10);
-// 😳😲
+
   print('---------------');
   print('Size: ${dLL.size}');
   dLL.addLast(300);
@@ -30,6 +30,7 @@ main() {
   dLL.addFirst('Billy');
   print(dLL.toList());
   print('Size: ${dLL.size}');
+  print('Empty: ${dLL.isNotEmpty}');
 
   print('---------------');
   print("Insert 'Object()' to position 2");
@@ -55,6 +56,7 @@ main() {
   dLL.addLast(null);
   dLL.addLast('(2+2)');
   print('Money: ${dLL.get(4)}\$');
+  print('Size: ${dLL.size}');
   print(dLL.toList());
 
   print('---------------');
@@ -74,5 +76,62 @@ main() {
   print('Last: ${dLL.peekLast()}');
 
   print('---------------');
+  dLL.clear();
+  print('The list was cleaned!');
+  dLL.addLast('beer');
+  dLL.addLast('23');
+  dLL.addLast(3);
+  dLL.addLast(1);
+  dLL.addLast(3);
+  dLL.addLast(1);
+  dLL.addLast(1);
+  dLL.addLast(true);
+  dLL.addLast('😲');
+
+  print(dLL.toList());
+  dLL.removeLastOccurrence(1);
+  dLL.removeFirstOccurrence(3);
+  print(dLL.toList());
+  dLL.removeFirstOccurrence('😲');
+  dLL.removeLastOccurrence('beer');
+  print(dLL.toList());
+  dLL.pop();
+  print(dLL.toList());
+  dLL.pollFirst();
+  dLL.pollLast();
+  print(dLL.toList());
+
+  print('---------------');
+  dLL.push('str');
+  print(dLL.toList());
+  print(dLL.peekFirst());
+  print(dLL.peekLast());
+
+  print('---------------');
+  print(dLL.toList());
+  print('Size: ${dLL.size}');
+
+  print(dLL.pop());
+  print(dLL.pop());
+  print(dLL.pop());
+
+  print(dLL.toList());
+  print('Size: ${dLL.size}');
+
+  print('---------------');
+  dLL.addFirst('a');
+  print('Size: ${dLL.size}');
+  print(dLL.peekFirst());
+  print('Size: ${dLL.size}');
+  print(dLL.peekLast());
+  print('Size: ${dLL.size}');
+  print(dLL.pollFirst());
+  print('Size: ${dLL.size}');
+  print(dLL.pollLast());
+  print('Size: ${dLL.size}');
+  print('Empty: ${dLL.isNotEmpty}');
+  print(dLL.pollFirst());
+  print('Size: ${dLL.size}');
+
   print('---------------');
 }

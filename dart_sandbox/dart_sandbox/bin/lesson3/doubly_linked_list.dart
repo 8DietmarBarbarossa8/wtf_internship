@@ -64,12 +64,6 @@ class DoublyLinkedList<E> implements Deque<E> {
     _size--;
   }
 
-  void clear() {
-    _headNode = null;
-    _tailNode = null;
-    _size = 0;
-  }
-
   // - получения по индексу
   E? get(int index) {
     if (_size == 0 || index < 0 || index > _size - 1) {
@@ -123,7 +117,7 @@ class DoublyLinkedList<E> implements Deque<E> {
 
   List<E> toList() {
     final List<E> list = [];
-    forEach((it) => list.add(it?.data as E));
+    if (isNotEmpty) forEach((it) => list.add(it?.data as E));
     return list;
   }
 
@@ -224,10 +218,7 @@ class DoublyLinkedList<E> implements Deque<E> {
   }
 
   @override
-  E pop() {
-    //
-    throw UnimplementedError();
-  }
+  E pop() => removeFirst();
 
   @override
   void push(E obj) => addFirst(obj);
@@ -240,14 +231,20 @@ class DoublyLinkedList<E> implements Deque<E> {
 
   @override
   E? pollFirst() {
-    // TODO: implement pollLast
-    throw UnimplementedError();
+    if (isEmpty) return null;
+
+    final E? element = get(0);
+    removeAt(0);
+    return element;
   }
 
   @override
   E? pollLast() {
-    // TODO: implement pollLast
-    throw UnimplementedError();
+    if (isEmpty) return null;
+
+    final E? element = get(_size - 1);
+    removeAt(_size - 1);
+    return element;
   }
 
   @override
@@ -274,14 +271,64 @@ class DoublyLinkedList<E> implements Deque<E> {
 
   @override
   bool removeLastOccurrence(Object obj) {
-    // TODO: implement removeLastOccurrence
-    throw UnimplementedError();
+    Node<E>? iterNode = _tailNode;
+
+    while (iterNode?.previous != null) {
+      if (obj == iterNode?.data) {
+        final Node<E>? leftNeighbor = iterNode?.previous;
+        final Node<E>? rightNeighbor = iterNode?.next;
+        leftNeighbor?.next = rightNeighbor;
+        rightNeighbor?.previous = leftNeighbor;
+
+        _size--;
+
+        return true;
+      }
+      iterNode = iterNode?.previous;
+    }
+
+    if (obj == iterNode?.data) {
+      Node<E>? bufferNode = _headNode;
+      _headNode = bufferNode?.next;
+      _headNode?.previous = null;
+
+      _size--;
+
+      return true;
+    }
+
+    return false;
   }
 
   @override
   bool removeFirstOccurrence(Object obj) {
-    // TODO: implement removeFirstOccurrence
-    throw UnimplementedError();
+    Node<E>? iterNode = _headNode;
+
+    while (iterNode?.next != null) {
+      if (obj == iterNode?.data) {
+        final Node<E>? leftNeighbor = iterNode?.previous;
+        final Node<E>? rightNeighbor = iterNode?.next;
+        leftNeighbor?.next = rightNeighbor;
+        rightNeighbor?.previous = leftNeighbor;
+
+        _size--;
+
+        return true;
+      }
+      iterNode = iterNode?.next;
+    }
+
+    if (obj == iterNode?.data) {
+      Node<E>? bufferNode = _tailNode;
+      _tailNode = bufferNode?.previous;
+      _tailNode?.next = null;
+
+      _size--;
+
+      return true;
+    }
+
+    return false;
   }
 
   // Other tool methods
@@ -289,10 +336,14 @@ class DoublyLinkedList<E> implements Deque<E> {
 
   bool get isNotEmpty => !isEmpty;
 
+  void clear() {
+    _headNode = null;
+    _tailNode = null;
+    _size = 0;
+  }
+
   void forEach(Function(Node<E>? it) action, [bool reverse = false]) {
     Node<E>? iterNode = !reverse ? _headNode : _tailNode;
-
-    if (iterNode == null) return;
 
     if (!reverse) {
       while (iterNode?.next != null) {
