@@ -21,13 +21,13 @@ import 'doubly_linked_list.dart';
 
 main() {
   final DoublyLinkedList dLL = DoublyLinkedList(volume: 10);
-
+  
   print('---------------');
   print('Size: ${dLL.size}');
   dLL.addLast(300);
   dLL.addLast('\$');
-  dLL.addFirst('Herrington');
-  dLL.addFirst('Billy');
+  dLL.addFirst('Darkholme');
+  dLL.addFirst('Van');
   print(dLL.toList());
   print('Size: ${dLL.size}');
   print('Empty: ${dLL.isNotEmpty}');
@@ -55,7 +55,7 @@ main() {
   dLL.addLast(false);
   dLL.addLast(null);
   dLL.addLast('(2+2)');
-  print('Money: ${dLL.get(4)}\$');
+  print('Money: ${dLL[4]}\$');
   print('Size: ${dLL.size}');
   print(dLL.toList());
 
@@ -67,8 +67,8 @@ main() {
   }
 
   print('---------------');
-  dLL.update(dLL.size - 1, '4');
-  dLL.update(3, 'Харитонов');
+  dLL[dLL.size - 1] = '4';
+  dLL[3] = 'Темнохолмов';
   print(dLL.toList());
 
   print('---------------');
@@ -132,6 +132,21 @@ main() {
   print('Empty: ${dLL.isNotEmpty}');
   print(dLL.pollFirst());
   print('Size: ${dLL.size}');
+
+  print('---------------');
+  var intList = DoublyLinkedList<int>(volume: 5);
+  // intList.addFirst('35');
+  intList.addFirst(35);
+  intList.addFirst(64);
+  intList.addFirst(17);
+  intList.addFirst(82);
+  intList.addFirst(74);
+
+  intList[1] = 12;
+  print(intList[1]);
+  List<int> list = intList.toList();
+  print(list);
+  print('List type: ${intList.runtimeType}');
 
   print('---------------');
 }

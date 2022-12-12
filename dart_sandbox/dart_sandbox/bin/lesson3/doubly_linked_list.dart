@@ -82,6 +82,8 @@ class DoublyLinkedList<E> implements Deque<E> {
     return node.data;
   }
 
+  E? operator [](int index) => get(index);
+
   // - получение размера списка
   int get size => _size;
 
@@ -112,6 +114,8 @@ class DoublyLinkedList<E> implements Deque<E> {
       newNode.next = rightNode;
     }
   }
+
+  void operator []=(int index, E value) => update(index, value);
 
   // - преобразования списка в List<E> (`dart:collection`)
 
